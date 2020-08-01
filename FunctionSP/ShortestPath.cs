@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FunctionSP
 {
-    public static class Dijkstra
+    public static class ShortestPath
     {
         [FunctionName("FindShortestPath")]
         public static async Task<IActionResult> Run(
