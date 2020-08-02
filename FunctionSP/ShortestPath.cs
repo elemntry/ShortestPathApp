@@ -7,9 +7,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ShortestPathAlgos;
-using System.ComponentModel.Design.Serialization;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace FunctionSP
 {
@@ -40,7 +38,7 @@ namespace FunctionSP
             {
                 string from = el.GetProperty("from").GetString();
                 string to = el.GetProperty("to").GetString();
-                int weight = el.TryGetProperty("weight", out var TrueWeight) ? TrueWeight.GetInt32() : 1;
+                int weight = el.TryGetProperty("weight", out var trueWeight) ? trueWeight.GetInt32() : 1;
                 
                 edges.Add(new Edge(nodes[nodes.FindIndex(node => node.Payload == from)], nodes[nodes.FindIndex(node => node.Payload == to)], weight));
             }
