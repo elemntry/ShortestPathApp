@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionSP", "FunctionSP\FunctionSP.csproj", "{0FC5FCD5-BEAF-416D-BA57-55208B4C0C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dijkstra", "Dijkstra\Dijkstra.csproj", "{07A83B44-F32F-44D5-B2DF-CFD6D4470624}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShortestPathAlgos", "Dijkstra\ShortestPathAlgos.csproj", "{07A83B44-F32F-44D5-B2DF-CFD6D4470624}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

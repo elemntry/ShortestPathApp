@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dijkstra
+namespace ShortestPathAlgos
 {
-    class Dijkstra
+    public class Dijkstra
     {
         private PriorityQueue<Node> h = new PriorityQueue<Node>();
         public int[] Dist { get; private set; }

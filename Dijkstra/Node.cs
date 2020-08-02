@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Dijkstra
+namespace ShortestPathAlgos
 {
-    class Node
+    public class Node
     {
         public string Payload { get; private set; }
         public Graph Graph { get; internal set; }
@@ -24,7 +24,7 @@ namespace Dijkstra
             get { return Graph.Edges.Where(e => e.From == this).ToList(); }
         }
     }
-    class Node<T> : Node
+    public class Node<T> : Node
     {
         // public T Payload { get; private set; }
 

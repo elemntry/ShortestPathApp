@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dijkstra
+namespace ShortestPathAlgos
 {
-    class Graph
+    public class Graph
     {
         public List<Edge> Edges { get; private set; }
-        public List<Node> Nodes { get; private set; }
-
+        public List<Node> Nodes { get; private set; }        
         public Graph(List<Node> nodes, List<Edge> edges)
         {
             Nodes = nodes;
@@ -17,7 +16,7 @@ namespace Dijkstra
             {
                 node.Graph = this;
             }
-        }
+        }        
 
         public void AddEdge(Edge edge)
         {

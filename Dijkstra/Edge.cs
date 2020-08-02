@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dijkstra
+namespace ShortestPathAlgos
 {
-    class Edge
+    public class Edge
     {
         public Node From { get; private set; }
         public Node To { get; private set; }
