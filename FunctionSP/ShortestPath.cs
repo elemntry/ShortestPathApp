@@ -7,9 +7,7 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using ShortestPathAlgos;
-using System.ComponentModel.Design.Serialization;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace FunctionSP
 {
@@ -30,13 +28,13 @@ namespace FunctionSP
             //create graph
             
             List<Node> nodes = new List<Node>();
-            foreach (var el in root.GetProperty("nodes").EnumerateArray())
+            foreach (var el in root.GetProperty("graph").GetProperty("nodes").EnumerateArray())
             {
                 nodes.Add(new Node<string>(el.GetProperty("id").GetString()));
             }
             //create edges
             List<Edge> edges = new List<Edge>();
-            foreach (var el in root.GetProperty("edges").EnumerateArray())
+            foreach (var el in root.GetProperty("graph").GetProperty("edges").EnumerateArray())
             {
                 string from = el.GetProperty("from").GetString();
                 string to = el.GetProperty("to").GetString();
@@ -48,16 +46,18 @@ namespace FunctionSP
             Graph graph = new Graph(nodes, edges);
 
             //init node Start and End
-            var startNode = root.GetProperty("selectedNodes")[0].GetString();
-            var endNode = root.GetProperty("selectedNodes")[1].GetString();
+            var startNode = root.GetProperty("graph").GetProperty("selectedNodes")[0].GetString();
+            var endNode = root.GetProperty("graph").GetProperty("selectedNodes")[1].GetString();
             //find shortest Path
             Dijkstra path = new Dijkstra(graph, graph.Nodes[graph.Nodes.FindIndex(node => node.Payload == startNode)]);
             path.FindShortestPath();
-
+            //prepare to return object
+            //json graph spec
+            //https://github.com/jsongraph/json-graph-specification
             //return response
-            return (ActionResult) new OkObjectResult(path.Dist);
+            return (ActionResult)new OkObjectResult(path.Dist);
             // or 
             //return new JsonResult(path.Dist);
         }
-    }    
+    }
 }
