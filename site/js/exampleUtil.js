@@ -293,16 +293,18 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
   async function postData(url = "", data = {}) {
     const response = await fetch(url, {
       method: "POST", // GET, POST, PUT, DELETE, etc.
-      mode: "no-cors", 
+      mode: "cors", 
       cache: 'no-cache',     
       headers: {
+        
         'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(data),      
     });
     console.log("response:");
     console.log(data);
+    return response;
   }  
   //collect data nodes and edges
   // const nodePositions = JSON.stringify(data.nodes.map(({id, label, x, y}) => ({id, label, x, y})));
@@ -319,9 +321,8 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
     },
   };
   //https://functionapp-shortestpath.azurewebsites.net/api/HttpTriggerCSharp?graph=' + request
-  let responce = postData("http://localhost:7071/api/FindShortestPath", request);
-  let result = responce.json();
-  console.log(result);
+  postData("http://localhost:7071/api/FindShortestPath", request).then(data => console.log(data));
+  
 });
 
 // insert into html

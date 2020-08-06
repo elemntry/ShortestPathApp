@@ -60,7 +60,7 @@ namespace FunctionSP
             // or 
             //return new JsonResult(path.Dist);            
             //return (ActionResult)new OkObjectResult(System.Text.Json.JsonSerializer.Serialize<int[]>(path.Dist));
-            return new JsonResult(DateTime.Now);
+            return new JsonResult(path.Dist);
         }
     }
 }
