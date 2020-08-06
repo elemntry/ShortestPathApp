@@ -293,19 +293,17 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
   async function postData(url = "", data = {}) {
     const response = await fetch(url, {
       method: "POST", // GET, POST, PUT, DELETE, etc.
-      mode: "no-cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      mode: "no-cors", 
+      cache: 'no-cache',     
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data),      
     });
-    console.log("response:")
+    console.log("response:");
     console.log(data);
-    return await response.json(); // parses JSON response into native JavaScript objects
-  }
-
+  }  
   //collect data nodes and edges
   // const nodePositions = JSON.stringify(data.nodes.map(({id, label, x, y}) => ({id, label, x, y})));
   // const edgeRoutes = data.edges.map(({from, to, label}) => ({from, to, label}));
@@ -315,22 +313,15 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
       edges: data.edges.map(({ from, to, label }) => ({
         from: String(from),
         to: String(to),
-        weight: label=1,
+        weight: (label = 1),
       })),
-      selectedNodes: ["14", "10"],
+      selectedNodes: ["14", "10"],//add values from selected nodes
     },
   };
   //https://functionapp-shortestpath.azurewebsites.net/api/HttpTriggerCSharp?graph=' + request
-  postData("http://localhost:7071/api/FindShortestPath", request)
-    .then(data => {
-        console.log("request:")
-      console.log(data);
-      //insert data into html
-      //insertFindShortestPathResult(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  let responce = postData("http://localhost:7071/api/FindShortestPath", request);
+  let result = responce.json();
+  console.log(result);
 });
 
 // insert into html

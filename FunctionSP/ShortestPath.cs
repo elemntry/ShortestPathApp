@@ -8,6 +8,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using ShortestPathAlgos;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
+using System;
 
 namespace FunctionSP
 {
@@ -15,7 +17,7 @@ namespace FunctionSP
     {
         [FunctionName("FindShortestPath")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -53,11 +55,12 @@ namespace FunctionSP
             path.FindShortestPath();
             //prepare to return object
             //json graph spec
-            //https://github.com/jsongraph/json-graph-specification
-            //return response
-            return (ActionResult)new OkObjectResult(path.Dist);
+            //https://github.com/jsongraph/json-graph-specification            
+            //return (ActionResult)new OkObjectResult(JsonSerializer.Serialize<int[]>(path.Dist));
             // or 
-            //return new JsonResult(path.Dist);
+            //return new JsonResult(path.Dist);            
+            //return (ActionResult)new OkObjectResult(System.Text.Json.JsonSerializer.Serialize<int[]>(path.Dist));
+            return new JsonResult(DateTime.Now);
         }
     }
 }
