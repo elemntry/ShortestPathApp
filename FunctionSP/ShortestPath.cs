@@ -8,8 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using ShortestPathAlgos;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
-using System;
+using System.Linq;
 
 namespace FunctionSP
 {
@@ -17,7 +16,8 @@ namespace FunctionSP
     {
         [FunctionName("FindShortestPath")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
+            HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
@@ -28,12 +28,13 @@ namespace FunctionSP
             JsonElement root = data.RootElement;
 
             //create graph
-            
+
             List<Node> nodes = new List<Node>();
             foreach (var el in root.GetProperty("graph").GetProperty("nodes").EnumerateArray())
             {
                 nodes.Add(new Node<string>(el.GetProperty("id").GetString()));
             }
+
             //create edges
             List<Edge> edges = new List<Edge>();
             foreach (var el in root.GetProperty("graph").GetProperty("edges").EnumerateArray())
@@ -41,15 +42,19 @@ namespace FunctionSP
                 string from = el.GetProperty("from").GetString();
                 string to = el.GetProperty("to").GetString();
                 int weight = el.TryGetProperty("weight", out var trueWeight) ? trueWeight.GetInt32() : 1;
-                
-                edges.Add(new Edge(nodes[nodes.FindIndex(node => node.Payload == from)], nodes[nodes.FindIndex(node => node.Payload == to)], weight));
+
+                edges.Add(new Edge(nodes[nodes.FindIndex(node => node.Payload == from)],
+                    nodes[nodes.FindIndex(node => node.Payload == to)], weight));
             }
+
             //create graph
             Graph graph = new Graph(nodes, edges);
 
             //init node Start and End
+            var startEndNode = root.GetProperty("graph").TryGetProperty("selectedNodes", out var endNode1);
+            var SelectedNodes = endNode1.EnumerateArray().Select(el => el.GetString()).ToArray();
             var startNode = root.GetProperty("graph").GetProperty("selectedNodes")[0].GetString();
-            var endNode = root.GetProperty("graph").GetProperty("selectedNodes")[1].GetString();
+            var endNode = root.GetProperty("graph").GetProperty("selectedNodes")[0].GetString();
             //find shortest Path
             Dijkstra path = new Dijkstra(graph, graph.Nodes[graph.Nodes.FindIndex(node => node.Payload == startNode)]);
             path.FindShortestPath();
