@@ -1,68 +1,69 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 
-<head>  
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>pi-19v graph visualisation</title>
-  <link rel="stylesheet" href="./css/style.css"/>
-  <script src="./js/vis-network.min.js" type="text/javascript"></script>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>pi-19v graph visualisation</title>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <script src="./js/vis-network.min.js" type="text/javascript"></script>
+
 </head>
 
 <body onload="init();">
 <p class="locale">
-  <label for="locale">Select a locale:</label>
-  <select id="locale" onchange="draw();">
-    <option value="en">en</option>
-    <option value="cn">cn</option>
-    <option value="cs">cs</option>
-    <option value="de">de</option>
-    <option value="es">es</option>
-    <option value="fr">fr</option>
-    <option value="it">it</option>
-    <option value="nl">nl</option>
-    <option value="pt-br">pt</option>
-    <option value="ru">ru</option>
-    <option value="uk">uk</option>
-  </select>
+    <label for="locale">Select a locale:</label>
+    <select id="locale" onchange="draw();">
+        <option value="en">en</option>
+        <option value="cn">cn</option>
+        <option value="cs">cs</option>
+        <option value="de">de</option>
+        <option value="es">es</option>
+        <option value="fr">fr</option>
+        <option value="it">it</option>
+        <option value="nl">nl</option>
+        <option value="pt-br">pt</option>
+        <option value="ru">ru</option>
+        <option value="uk">uk</option>
+    </select>
 </p>
 
 <div id="node-popUp">
-  <span id="node-operation">узел</span> <br/>
-  <table style="margin:auto;">
-    <!--    custom id -->
-    <!--    <tr>-->
-    <!--      <td>id</td>-->
-    <!--      <td>-->
-    <!--        <label for="node-id"></label><input id="node-id" value="идентификатор"/>-->
-    <!--      </td>-->
-    <!--    </tr>-->
-    <!--    /custom id-->
-    <tr>
-      <td>имя</td>
-      <td>
-        <label for="node-label"></label><input id="node-label" value="значение"/>
-      </td>
-    </tr>
-  </table>
+    <span id="node-operation">узел</span> <br/>
+    <table style="margin:auto;">
+        <!--    custom id -->
+        <!--    <tr>-->
+        <!--      <td>id</td>-->
+        <!--      <td>-->
+        <!--        <label for="node-id"></label><input id="node-id" value="идентификатор"/>-->
+        <!--      </td>-->
+        <!--    </tr>-->
+        <!--    /custom id-->
+        <tr>
+            <td>имя</td>
+            <td>
+                <label for="node-label"></label><input id="node-label" value="значение"/>
+            </td>
+        </tr>
+    </table>
 
-  <input type="button" value="сохранить" id="node-saveButton"/>
-  <input type="button" value="отмена" id="node-cancelButton"/>
+    <input type="button" value="сохранить" id="node-saveButton"/>
+    <input type="button" value="отмена" id="node-cancelButton"/>
 </div>
 
 <div id="edge-popUp">
-  <span id="edge-operation">ребро</span> <br/>
-  <table style="margin:auto;">
-    <tr>
-      <td>вес</td>
-      <td>
-        <label for="edge-label"></label><input id="edge-label" value="1" type="number" min="1"
-                                               oninput="validity.valid||(value='');"/>
-      </td>
-    </tr>
-  </table>
+    <span id="edge-operation">ребро</span> <br/>
+    <table style="margin:auto;">
+        <tr>
+            <td>вес</td>
+            <td>
+                <label for="edge-label"></label><input id="edge-label" value="1" type="number" min="1"
+                                                       oninput="validity.valid||(value='');"/>
+            </td>
+        </tr>
+    </table>
 
-  <input type="button" value="сохранить" id="edge-saveButton"/>
-  <input type="button" value="отмена" id="edge-cancelButton"/>
+    <input type="button" value="сохранить" id="edge-saveButton"/>
+    <input type="button" value="отмена" id="edge-cancelButton"/>
 </div>
 
 <br/>
@@ -71,8 +72,8 @@
 <!--<button id="extract-positions">извлечь данные</button>-->
 <!--<label for="positions"></label><textarea id="positions"></textarea>-->
 <div class="azure__function">
-  <button id="sendrequest">Найти кратчайший путь</button>
-<!--  <label for="azurefunc"></label><textarea name="func" id="azurefunc" cols="30" rows="10"></textarea>-->
+    <button id="sendrequest">Найти кратчайший путь</button>
+    <!--  <label for="azurefunc"></label><textarea name="func" id="azurefunc" cols="30" rows="10"></textarea>-->
 </div>
 <div class="shortest__path"></div>
 <script src="./js/exampleUtil.js"></script>
