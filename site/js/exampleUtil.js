@@ -315,8 +315,8 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
     };
 
     postData("http://localhost:7071/api/FindShortestPath", request)
-        //for test
         .then(result => {
+            //for test
             console.log(result);
             insertFindShortestPathResult(result);
         })

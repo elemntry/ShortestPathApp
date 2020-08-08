@@ -61,6 +61,13 @@ namespace ShortestPathAlgos
             {
                 var u = h.Dequeue();
                 VisitedNodes[Graph.Nodes.IndexOf(u)] = true; // помечаем вершину как посещеную
+                //TODO: определить ориентированный или нет граф
+                //если граф ориентированный - берем только исходящие ребра
+                //если граф неориентированный - создаем словарь с входящими и исходящими ребрами
+                //var directed = true;
+                //var edgesInboundAndOutbounds = new Dictionary<int, Edge>();
+                //Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges.ForEach(edge => edgesInboundAndOutbounds.Add(edge.,edge));
+                //var edgesInNode = directed ? Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges : 
                 foreach (var edge in Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges)
                 {
                     Relax(u, edge.To, edge.Weight);
