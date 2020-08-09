@@ -303,16 +303,17 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
     // const nodePositions = JSON.stringify(data.nodes.map(({id, label, x, y}) => ({id, label, x, y})));
     // const edgeRoutes = data.edges.map(({from, to, label}) => ({from, to, label}));
     const request = {
-        graph: {
-            nodes: data.nodes.map(({id}) => ({id: id})),
+            graph: {
+                nodes: data.nodes.map(({id}) => ({id: id})),
             edges: data.edges.map(({from, to, label}) => ({
                 from: String(from),
                 to: String(to),
                 weight: (label = 1),
             })),
-            selectedNodes: network.getSelectedNodes()
+            selectedNodes: network.getSelectedNodes(),
+            directed: true,//TODO insert graph prop
         },
-    };
+        };
 
     postData("http://localhost:7071/api/FindShortestPath", request)
         .then(result => {

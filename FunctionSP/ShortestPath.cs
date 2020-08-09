@@ -47,20 +47,21 @@ namespace FunctionSP
                     nodes[nodes.FindIndex(node => node.Payload == to)], weight));
             }
 
+            var directed = root.GetProperty("graph").GetProperty("directed").GetBoolean();
             //create graph
-            Graph graph = new Graph(nodes, edges);
+            Graph graph = new Graph(nodes, edges, directed);
 
             //init node Start and End
             var startEndNode = root.GetProperty("graph").TryGetProperty("selectedNodes", out var endNode1);
-            var SelectedNodes = endNode1.EnumerateArray().Select(el => el.GetString()).ToArray();
-            var startNode = root.GetProperty("graph").GetProperty("selectedNodes")[0].GetString();
-            var endNode = root.GetProperty("graph").GetProperty("selectedNodes")[0].GetString();
+            var selectedNodes = endNode1.EnumerateArray().Select(el => el.GetString()).ToArray();
+            var startNode = selectedNodes[0];
+            var endNode = selectedNodes[1];
             //find shortest Path
             Dijkstra path = new Dijkstra(graph, graph.Nodes[graph.Nodes.FindIndex(node => node.Payload == startNode)]);
             path.FindShortestPath();
             //prepare to return object
             //json graph spec
-            //https://github.com/jsongraph/json-graph-specification            
+            //https://github.com/jsongraph/json-graph-specification
             //return (ActionResult)new OkObjectResult(JsonSerializer.Serialize<int[]>(path.Dist));
             // or 
             //return new JsonResult(path.Dist);            
