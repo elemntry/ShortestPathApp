@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using ShortestPathAlgos;
 using System.Collections.Generic;
@@ -66,7 +67,14 @@ namespace FunctionSP
             // or 
             //return new JsonResult(path.Dist);            
             //return (ActionResult)new OkObjectResult(System.Text.Json.JsonSerializer.Serialize<int[]>(path.Dist));
-            return new JsonResult(path.Dist);
+            var options = new JsonSerializerOptions
+            {
+                IgnoreNullValues = true,
+                WriteIndented = true
+            };
+            //TODO return graph with prev short node and weight from short path
+            //return new JsonResult(path.Dist);
+            return new JsonResult(path.Prev.Select(el => el?.Payload));
         }
     }
 }
