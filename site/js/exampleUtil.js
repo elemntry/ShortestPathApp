@@ -139,7 +139,12 @@ function draw() {
             selectConnectedEdges: false,
         },
         edges: {
-            arrows: "to",
+            arrows: {
+                to: {
+                    enabled: false,
+                }
+            }
+
         },
         layout: {randomSeed: seed}, // just to make sure the layout is the same when the locale is changed
         locale: document.getElementById("locale").value,
@@ -284,6 +289,47 @@ function clearGraph() {
 //     console.log(JSON.stringify(selectedNodesIds));
 //     // end test
 // });
+// change arrows view
+// let opt = {edges: {
+// arrows: {
+// to:{
+// enabled: false,
+// }
+// }
+// }}
+// network.setOptions(opt);
+//
+//change arrows type
+//
+document.getElementById("isDirected").addEventListener("change", function() {
+    if (this.checked) {
+        let opt = {
+            edges: {
+                arrows: {
+                    to: {
+                        enabled: true,
+                    }
+                }
+            }
+        }
+        console.log("checked");
+        network.setOptions(opt);
+        network.redraw();
+    } else if (!this.checked){
+        let opt = {
+            edges: {
+                arrows: {
+                    to: {
+                        enabled: false,
+                    }
+                }
+            }
+        }
+        console.log("unchecked");
+        network.setOptions(opt);
+        network.redraw();
+    }
+});
 //send query to azure func
 document.getElementById("sendrequest").addEventListener("click", (e) => {
     async function postData(url = "", data = {}) {
@@ -303,8 +349,8 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
     // const nodePositions = JSON.stringify(data.nodes.map(({id, label, x, y}) => ({id, label, x, y})));
     // const edgeRoutes = data.edges.map(({from, to, label}) => ({from, to, label}));
     const request = {
-            graph: {
-                nodes: data.nodes.map(({id}) => ({id: id})),
+        graph: {
+            nodes: data.nodes.map(({id}) => ({id: id})),
             edges: data.edges.map(({from, to, label}) => ({
                 from: String(from),
                 to: String(to),
@@ -313,7 +359,7 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
             selectedNodes: network.getSelectedNodes(),
             directed: true,//TODO insert graph prop
         },
-        };
+    };
 
     postData("http://localhost:7071/api/FindShortestPath", request)
         .then(result => {
