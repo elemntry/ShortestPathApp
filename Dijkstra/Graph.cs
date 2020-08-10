@@ -8,9 +8,8 @@ namespace ShortestPathAlgos
     {
         public bool Directed { get; private set; }
         public List<Edge> Edges { get; private set; }
-        public List<Node> Nodes { get; private set; }
-
-        public Graph(List<Node> nodes, List<Edge> edges, bool directed)
+        public List<Node> Nodes { get; private set; }        
+    public Graph(List<Node> nodes, List<Edge> edges, bool directed)
         {
             Nodes = nodes;
             Edges = edges;

@@ -74,7 +74,18 @@ namespace FunctionSP
             };
             //TODO return graph with prev short node and weight from short path
             //return new JsonResult(path.Dist);
-            return new JsonResult(path.Prev.Select(el => el?.Payload));
+            var result = new ShortestPathAnswer(path.Dist, path.Prev);
+            return new JsonResult(result);
+        }
+    }
+    public class ShortestPathAnswer
+    {
+        public int[] Dist { get; private set; }
+        public string[] Prev { get; private set; }
+        public ShortestPathAnswer(int[] dist, Node[] prev)
+        {
+            Dist = dist;
+            Prev = prev.Select(el => el?.ToString()).ToArray();
         }
     }
 }
