@@ -23,6 +23,10 @@ namespace ShortestPathAlgos
         {
             get { return Graph.Edges.Where(e => e.From == this).ToList(); }
         }
+        public override string ToString()
+        {
+            return Payload.ToString();
+        }
     }
     public class Node<T> : Node
     {
