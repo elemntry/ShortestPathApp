@@ -33,7 +33,7 @@ namespace FunctionSP
             List<Node> nodes = new List<Node>();
             foreach (var el in root.GetProperty("graph").GetProperty("nodes").EnumerateArray())
             {
-                nodes.Add(new Node<string>(el.GetProperty("id").GetString()));
+                nodes.Add(new Node(el.GetProperty("id").GetString()));
             }
 
             //create edges
@@ -42,7 +42,7 @@ namespace FunctionSP
             {
                 string from = el.GetProperty("from").GetString();
                 string to = el.GetProperty("to").GetString();
-                int weight = el.TryGetProperty("weight", out var trueWeight) ? trueWeight.GetInt32() : 1;
+                int weight = el.TryGetProperty("weight", out var trueWeight) ? int.Parse(el.GetProperty("weight").GetString()) : 1;
 
                 edges.Add(new Edge(nodes[nodes.FindIndex(node => node.Payload == from)],
                     nodes[nodes.FindIndex(node => node.Payload == to)], weight));
@@ -53,8 +53,8 @@ namespace FunctionSP
             Graph graph = new Graph(nodes, edges, directed);
 
             //init node Start and End
-            var startEndNode = root.GetProperty("graph").TryGetProperty("selectedNodes", out var endNode1);
-            var selectedNodes = endNode1.EnumerateArray().Select(el => el.GetString()).ToArray();
+            var isSelectedNodes = root.GetProperty("graph").TryGetProperty("selectedNodes", out var selectedNodesElems);
+            var selectedNodes = selectedNodesElems.EnumerateArray().Select(el => el.GetString()).ToArray();
             var startNode = selectedNodes[0];
             var endNode = selectedNodes[1];
             //find shortest Path
@@ -67,11 +67,6 @@ namespace FunctionSP
             // or 
             //return new JsonResult(path.Dist);            
             //return (ActionResult)new OkObjectResult(System.Text.Json.JsonSerializer.Serialize<int[]>(path.Dist));
-            var options = new JsonSerializerOptions
-            {
-                IgnoreNullValues = true,
-                WriteIndented = true
-            };
             //TODO return graph with prev short node and weight from short path
             //return new JsonResult(path.Dist);
             var result = new ShortestPathAnswer(path.Dist, path.Prev);

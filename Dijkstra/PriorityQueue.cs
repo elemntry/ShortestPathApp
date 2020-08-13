@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
 namespace ShortestPathAlgos
 {
     class PriorityQueue<T>
@@ -14,29 +12,29 @@ namespace ShortestPathAlgos
         // * http://xfleury.github.io/graphsearch.html
         // * http://stackoverflow.com/questions/102398/priority-queue-in-net
 
-        private List<Tuple<T, int>> elements = new List<Tuple<T, int>>();
+        private readonly List<Tuple<T, int>> _elements = new List<Tuple<T, int>>();
 
-        public int Count => elements.Count;
+        public int Count => _elements.Count;
 
         public void Enqueue(T item, int priority)
         {
-            elements.Add(Tuple.Create(item, priority));
+            _elements.Add(Tuple.Create(item, priority));
         }
 
         public T Dequeue()
         {
             int bestIndex = 0;
 
-            for (int i = 0; i < elements.Count; i++)
+            for (int i = 0; i < _elements.Count; i++)
             {
-                if (elements[i].Item2 < elements[bestIndex].Item2)
+                if (_elements[i].Item2 < _elements[bestIndex].Item2)
                 {
                     bestIndex = i;
                 }
             }
 
-            T bestItem = elements[bestIndex].Item1;
-            elements.RemoveAt(bestIndex);
+            T bestItem = _elements[bestIndex].Item1;
+            _elements.RemoveAt(bestIndex);
             return bestItem;
         }
     }
