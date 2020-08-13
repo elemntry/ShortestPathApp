@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ShortestPathAlgos
 {
@@ -25,21 +23,22 @@ namespace ShortestPathAlgos
         }
         public override string ToString()
         {
-            return Payload.ToString();
+            return Payload;
         }
     }
-    public class Node<T> : Node
-    {
-        // public T Payload { get; private set; }
-
-        public Node(string payload) : base(payload)
-        {
-            // Payload = payload;
-        }
-
-        public override string ToString()
-        {
-            return Payload.ToString();
-        }
-    }
+    //TODO: make correct class 
+    // public class Node<T> : Node
+    // {
+    //     public T Payload { get; private set; }
+    //
+    //     public Node(string payload) : base(payload)
+    //     {
+    //         // Payload = payload;
+    //     }
+    //
+    //     public override string ToString()
+    //     {
+    //         // return Payload;
+    //     }
+    // }
 }
