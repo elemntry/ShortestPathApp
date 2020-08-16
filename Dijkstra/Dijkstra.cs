@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ShortestPathAlgos
@@ -61,18 +62,32 @@ namespace ShortestPathAlgos
             {
                 var u = h.Dequeue();
                 VisitedNodes[Graph.Nodes.IndexOf(u)] = true; // помечаем вершину как посещеную
-                //TODO: определить ориентированный или нет граф
                 //если граф ориентированный - берем только исходящие ребра
-                //если граф неориентированный - создаем словарь с входящими и исходящими ребрами
-                //var directed = true;
-                //var edgesInboundAndOutbounds = new Dictionary<int, Edge>();
-                //Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges.ForEach(edge => edgesInboundAndOutbounds.Add(edge.,edge));
-                //var edgesInNode = directed ? Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges : 
-                foreach (var edge in Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges)
+                //если граф неориентированный - берем входящие и исходящие ребра
+                var edges = Graph.IsDirected
+                    ? Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges
+                    : Graph.Nodes[Graph.Nodes.IndexOf(u)].OutboundEdges
+                        .Concat(Graph.Nodes[Graph.Nodes.IndexOf(u)].InboundEdges);
+                foreach (var edge in edges)
                 {
-                    Relax(u, edge.To, edge.Weight);
-                    if (VisitedNodes[Graph.Nodes.IndexOf(edge.To)] == false)// Проверяем, посещена ли вершина, если нет, то добавляем в очередь на релаксацию
-                        h.Enqueue(edge.To, edge.Weight);
+                    if (Graph.IsDirected)
+                    {
+                        Relax(u, edge.To, edge.Weight);
+                        if (VisitedNodes[Graph.Nodes.IndexOf(edge.To)] == false
+                        ) // Проверяем, посещена ли вершина, если нет, то добавляем в очередь на релаксацию
+                            h.Enqueue(edge.To, edge.Weight);
+                    }
+                    else
+                    {
+                        Relax(u, edge.To, edge.Weight);
+                        if (VisitedNodes[Graph.Nodes.IndexOf(edge.To)] == false
+                        ) // Проверяем, посещена ли вершина, если нет, то добавляем в очередь на релаксацию
+                            h.Enqueue(edge.To, edge.Weight);
+                        Relax(u, edge.From, edge.Weight);
+                        if (VisitedNodes[Graph.Nodes.IndexOf(edge.From)] == false
+                        ) // Проверяем, посещена ли вершина, если нет, то добавляем в очередь на релаксацию
+                            h.Enqueue(edge.From, edge.Weight);
+                    }
                 }
             }
         }

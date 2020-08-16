@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ShortestPathAlgos
 {
     public class Graph
     {
-        public bool Directed { get; private set; }
+        public bool IsDirected { get; private set; }
         public List<Edge> Edges { get; private set; }
-        public List<Node> Nodes { get; private set; }
-
-        public Graph(List<Node> nodes, List<Edge> edges, bool directed)
+        public List<Node> Nodes { get; private set; }        
+    public Graph(List<Node> nodes, List<Edge> edges, bool directed)
         {
             Nodes = nodes;
             Edges = edges;
-            Directed = directed;
+            IsDirected = directed;
             foreach (var node in nodes)
             {
                 node.Graph = this;

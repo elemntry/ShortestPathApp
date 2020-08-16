@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ShortestPathAlgos
 {
@@ -23,19 +21,24 @@ namespace ShortestPathAlgos
         {
             get { return Graph.Edges.Where(e => e.From == this).ToList(); }
         }
-    }
-    public class Node<T> : Node
-    {
-        // public T Payload { get; private set; }
-
-        public Node(string payload) : base(payload)
-        {
-            // Payload = payload;
-        }
-
         public override string ToString()
         {
-            return Payload.ToString();
+            return Payload;
         }
     }
+    //TODO: make correct class 
+    // public class Node<T> : Node
+    // {
+    //     public T Payload { get; private set; }
+    //
+    //     public Node(string payload) : base(payload)
+    //     {
+    //         // Payload = payload;
+    //     }
+    //
+    //     public override string ToString()
+    //     {
+    //         // return Payload;
+    //     }
+    // }
 }
