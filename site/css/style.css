@@ -1,9 +1,57 @@
-body,
-select {
-    font: 10pt sans;
+body {
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight: 300;
+    font-size: 16px;
+
 }
 
-#mynetwork {
+.container {
+    display: grid;
+    align-content: center;
+    grid-template-columns: 1200px;
+    justify-content: center;
+}
+
+.shortestpath {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "header header"
+    "article aside";
+    min-height: 95vh;
+}
+
+.header {
+    grid-area: header;
+}
+
+.graph {
+    grid-area: article;
+}
+
+.settings {
+    grid-area: aside;
+}
+
+.wrapper-settings {
+    background: #f6f6f6;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "header header"
+    "isdirected-checkbox isdirected-label"
+    "btn-find btn-remove"
+    "path-info path-info"
+    "btn-showpath";
+}
+.wrapper-settings__header{
+    grid-area: header;
+}
+.isdirected{
+    grid-area: isdirected;
+}
+.mynetwork {
     position: relative;
     width: 800px;
     height: 600px;
