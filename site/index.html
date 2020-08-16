@@ -3,8 +3,9 @@
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>pi-19v graph visualisation</title>
+    <title>Курсовая работа. АЛГОРИТМЫ НА ГРАФАХ: ПОИСК КРАТЧАЙШЕГО ПУТИ</title>
     <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="icon" type="image/png" href="./img/favicon.png">
     <script src="./js/vis-network.min.js" type="text/javascript"></script>
 
 </head>
@@ -67,18 +68,23 @@
 </div>
 
 <br/>
-<div id="mynetwork"></div>
-<input type="checkbox" id="isDirected" name="isDirected" checked>
-<label for="isDirected">ориентированный граф
-</label>
-<br>
-<button id="remove-graph">удалить граф</button>
-<!--<button id="extract-positions">извлечь данные</button>-->
-<!--<label for="positions"></label><textarea id="positions"></textarea>-->
-<div class="azure__function">
-    <button id="sendrequest">Найти кратчайший путь</button>
-    <!--  <label for="azurefunc"></label><textarea name="func" id="azurefunc" cols="30" rows="10"></textarea>-->
-</div>
+<section class="shortestpath">
+    <div id="mynetwork" class="mynetwork"></div>
+    <div class="settings">
+        <input type="checkbox" id="isDirected" name="isDirected" checked>
+        <label for="isDirected">ориентированный граф
+        </label>
+        <br>
+        <button id="remove-graph">удалить граф</button>
+        <!--<button id="extract-positions">извлечь данные</button>-->
+        <!--<label for="positions"></label><textarea id="positions"></textarea>-->
+        <div class="azure__function">
+            <button id="sendrequest">Найти кратчайший путь</button>
+            <!--  <label for="azurefunc"></label><textarea name="func" id="azurefunc" cols="30" rows="10"></textarea>-->
+        </div>
+    </div>
+</section>
+
 <div class="shortest__path"></div>
 <script src="./js/exampleUtil.js"></script>
 </body>
