@@ -46,61 +46,6 @@ function getScaleFreeNetwork(nodeCount) {
 }
 
 var seededRandom = vis.util.Alea("SEED");
-// another method to get random scale nodes
-// function getScaleFreeNetworkSeeded(nodeCount, seed) {
-//     if (seed) {
-//         randomSeed = Number(seed);
-//     }
-//     var nodes = [];
-//     var edges = [];
-//     var connectionCount = [];
-//     var edgesId = 0;
-//
-//     // randomly create some nodes and edges
-//     for (var i = 0; i < nodeCount; i++) {
-//         nodes.push({
-//             id: i,
-//             label: String(i),
-//         });
-//
-//         connectionCount[i] = 0;
-//
-//         // create edges in a scale-free-network way
-//         if (i == 1) {
-//             var from = i;
-//             var to = 0;
-//             edges.push({
-//                 id: edgesId++,
-//                 from: from,
-//                 to: to,
-//             });
-//             connectionCount[from]++;
-//             connectionCount[to]++;
-//         } else if (i > 1) {
-//             var conn = edges.length * 2;
-//             var rand = Math.floor(seededRandom() * conn);
-//             var cum = 0;
-//             var j = 0;
-//             while (j < connectionCount.length && cum < rand) {
-//                 cum += connectionCount[j];
-//                 j++;
-//             }
-//
-//             var from = i;
-//             var to = j;
-//             edges.push({
-//                 id: edgesId++,
-//                 from: from,
-//                 to: to,
-//             });
-//             connectionCount[from]++;
-//             connectionCount[to]++;
-//         }
-//     }
-//
-//     return {nodes: new vis.DataSet(nodes), edges: new vis.DataSet(edges)};
-// }
-
 var nodes = null;
 var edges = null;
 var network = null;
@@ -275,33 +220,7 @@ function clearGraph() {
     draw();
 }
 
-// //https://stackoverflow.com/questions/40489700/visjs-save-manipulated-data-to-json
-// const positionsElement = document.getElementById('positions');
-// document.getElementById('extract-positions').addEventListener('click', e => {
-//     network.storePositions();
-//     const selectedNodesIds = network.getSelectedNodes();
-//     const nodePositions = data.nodes.map(({id, label, x, y}) => ({id, label, x, y}));
-//     const edgeRoutes = data.edges.map(({from, to, label}) => ({from, to, label}));
-//     positionsElement.value = JSON.stringify(nodePositions) + JSON.stringify(edgeRoutes);
-//     //for test. Print to console JSON nodes and edges
-//     console.log(JSON.stringify(nodePositions));
-//     console.log(JSON.stringify(edgeRoutes));
-//     console.log(JSON.stringify(selectedNodesIds));
-//     // end test
-// });
-// change arrows view
-// let opt = {edges: {
-// arrows: {
-// to:{
-// enabled: false,
-// }
-// }
-// }}
-// network.setOptions(opt);
-//
-//change arrows type
-//
-document.getElementById("isDirected").addEventListener("change", function() {
+document.getElementById("isDirected").addEventListener("change", function () {
     if (this.checked) {
         let opt = {
             edges: {
@@ -312,10 +231,11 @@ document.getElementById("isDirected").addEventListener("change", function() {
                 }
             }
         }
+        //for test
         console.log("checked");
         network.setOptions(opt);
         network.redraw();
-    } else if (!this.checked){
+    } else if (!this.checked) {
         let opt = {
             edges: {
                 arrows: {
@@ -357,7 +277,7 @@ document.getElementById("sendrequest").addEventListener("click", (e) => {
                 weight: (label = 1),
             })),
             selectedNodes: network.getSelectedNodes(),
-            directed: true,//TODO insert graph prop
+            directed: document.getElementById("isDirected").checked,
         },
     };
 
@@ -376,7 +296,7 @@ function insertFindShortestPathResult(data) {
     innerDiv.textContent = "";
     let ul = document.createElement("ul");
     let idx = 0;
-    for (let [id, length] of Object.entries(data)) {
+    for (let [id, length] of Object.entries(data.dist)) {
         console.log(id);
         let li = document.createElement("li");
         li.textContent =
@@ -390,3 +310,11 @@ function insertFindShortestPathResult(data) {
     }
     innerDiv.appendChild(ul);
 }
+//listener for select node
+//TODO: implement function which listen when node is selected
+//
+//     network.on("selectNode", function consoleLogSelectNode() {
+//         console.log(network.getSelectedNodes());
+//     })
+
+

@@ -42,7 +42,7 @@ namespace FunctionSP
             {
                 string from = el.GetProperty("from").GetString();
                 string to = el.GetProperty("to").GetString();
-                int weight = el.TryGetProperty("weight", out var trueWeight) ? int.Parse(el.GetProperty("weight").GetString()) : 1;
+                int weight = el.TryGetProperty("weight", out var trueWeight) ? el.GetProperty("weight").GetInt32() : 1;
 
                 edges.Add(new Edge(nodes[nodes.FindIndex(node => node.Payload == from)],
                     nodes[nodes.FindIndex(node => node.Payload == to)], weight));

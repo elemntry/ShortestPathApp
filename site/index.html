@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="./img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <script src="./js/vis-network.min.js" type="text/javascript"></script>
+    
 
 </head>
 
@@ -80,15 +81,16 @@
             <div class="wrapper-settings">
                 <p class="wrapper-settings__header">Настройки</p>
                 <div class="isdirected">
-                <input type="checkbox" id="isDirected" name="isDirected" checked>
-                <label for="isDirected">ориентированный граф                    
-                </label>
+                    <input type="checkbox" id="isDirected" name="isDirected">
+                    <label for="isDirected">ориентированный граф
+                    </label>
                 </div>
-                <div class="azure__function">
-                    <button id="sendrequest" class="btn btn__find">Найти путь</button>
-                </div>
+                <button id="sendrequest" class="btn btn__find">Найти путь</button>
                 <button id="remove-graph" class="btn btn__remove">удалить граф</button>
-                <div class="path-info"></div>
+                <div class="path-info">
+                    <p>Кратчайший путь</p>
+                    <div class="shortest__path"></div>
+                </div>
                 <button class="btn btn__showpath">Показать маршрут</button>
             </div>
         </aside>
@@ -96,7 +98,7 @@
 
 </div>
 
-<div class="shortest__path"></div>
+
 <script src="./js/exampleUtil.js"></script>
 </body>
 

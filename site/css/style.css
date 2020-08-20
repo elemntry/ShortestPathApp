@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', 'sans-serif';
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
 
 }
@@ -17,13 +17,12 @@ body {
     grid-gap: 1em;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-    "header header"
-    "article aside";
-    min-height: 95vh;
+    "main__header main__header"
+    "article aside";    
 }
 
 .header {
-    grid-area: header;
+    grid-area: main__header;
 }
 
 .graph {
@@ -37,20 +36,67 @@ body {
 .wrapper-settings {
     background: #f6f6f6;
     display: grid;
+    grid-gap: 1em;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 
-    "header header"
-    "isdirected-checkbox isdirected-label"
+    "settings__header settings__header"
+    "isdirected-label isdirected-label"
     "btn-find btn-remove"
     "path-info path-info"
-    "btn-showpath";
+    "btn-showpath btn-showpath";
+    padding: 1em;
 }
-.wrapper-settings__header{
-    grid-area: header;
+
+.wrapper-settings__header {
+    grid-area: settings__header;
+    justify-self: center;
 }
-.isdirected{
-    grid-area: isdirected;
+
+.isdirected {
+    grid-area: isdirected-label;
 }
+
+.btn {
+    border: 1px solid gray;
+    border-radius: 0;
+    padding: 0.5em 1em;
+    font-family: 'Open Sans', 'sans-serif';
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+.btn:active {
+    opacity: 1;
+}
+
+.btn__find {
+    grid-area: btn-find;
+    justify-self: start;
+    color: #f6f6f6;
+    background-color: #04BD00;
+}
+
+.btn__remove {
+    grid-area: btn-remove;
+    justify-self: start;
+    color: #f6f6f6;
+    background-color: #F59C00;
+}
+
+.path-info {
+    grid-area: path-info;
+}
+
+.btn__showpath {
+    grid-area: btn-showpath;
+    justify-self: start;
+    background-color: #C4C4C4;
+}
+
 .mynetwork {
     position: relative;
     width: 800px;
