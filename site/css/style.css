@@ -8,8 +8,7 @@ body {
 .container {
     display: grid;
     align-content: center;
-    grid-template-columns: 1200px;
-    justify-content: center;
+    grid-template-columns: 1200px;    
 }
 
 .shortestpath {
