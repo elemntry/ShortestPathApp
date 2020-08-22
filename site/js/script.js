@@ -284,3 +284,5 @@ network.on("click", function (params) {
       : "не задана конечная вершина";
   }
 });
+
+// TODO: check is all nodes are selected to find. if dalse button find route must be disabled
