@@ -1,168 +1,252 @@
-body {
-    font-family: 'Open Sans', 'sans-serif';
-    font-weight: 400;
-    font-size: 16px;
+/*css reset*/
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* custom own styles */
+body {
+  font-family: "Open Sans", "sans-serif";
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .container {
-    display: grid;
-    align-content: center;
-    grid-template-columns: 1200px;    
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-content: center;
 }
 
 .shortestpath {
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 800px 350px;
+  grid-template-areas:
     "main__header main__header"
-    "article aside";    
+    "article aside";
 }
 
 .header {
-    grid-area: main__header;
+  grid-area: main__header;
+  justify-self: center;
 }
 
 .graph {
-    grid-area: article;
+  grid-area: article;
 }
 
 .settings {
-    grid-area: aside;
+  grid-area: aside;
 }
 
 .wrapper-settings {
-    background: #f6f6f6;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
+  background: #f6f6f6;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
     "settings__header settings__header"
     "isdirected-label isdirected-label"
     "btn-find btn-remove"
     "path-info path-info"
     "btn-showpath btn-showpath";
-    padding: 1em;
+  padding: 1em;
 }
 
 .wrapper-settings__header {
-    grid-area: settings__header;
-    justify-self: center;
+  grid-area: settings__header;
+  justify-self: center;
 }
 
 .isdirected {
-    grid-area: isdirected-label;
+  grid-area: isdirected-label;
 }
 
 .btn {
-    border: 1px solid gray;
-    border-radius: 0;
-    padding: 0.5em 1em;
-    font-family: 'Open Sans', 'sans-serif';
-    font-size: 1em;
-    font-weight: 400;
+  border: 1px solid gray;
+  border-radius: 0;
+  padding: 0.5em 1em;
+  font-family: "Open Sans", "sans-serif";
+  font-size: 1em;
+  font-weight: 400;
 }
 
 .btn:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .btn:active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .btn__find {
-    grid-area: btn-find;
-    justify-self: start;
-    color: #f6f6f6;
-    background-color: #04BD00;
+  grid-area: btn-find;
+  justify-self: start;
+  color: #f6f6f6;
+  background-color: #04bd00;
 }
 
 .btn__remove {
-    grid-area: btn-remove;
-    justify-self: start;
-    color: #f6f6f6;
-    background-color: #F59C00;
+  grid-area: btn-remove;
+  justify-self: start;
+  color: #f6f6f6;
+  background-color: #f59c00;
 }
 
 .path-info {
-    grid-area: path-info;
+  grid-area: path-info;
+}
+.path-info__node {
+  font-weight: 700a;
 }
 
 .btn__showpath {
-    grid-area: btn-showpath;
-    justify-self: start;
-    background-color: #C4C4C4;
+  grid-area: btn-showpath;
+  justify-self: start;
+  background-color: #c4c4c4;
 }
 
 #mynetwork {
-    position: relative;
-    width: 800px;
-    height: 600px;
-    border: 1px solid lightgray;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  border: 1px solid lightgray;
 }
 
 table.legend_table {
-    font-size: 11px;
-    border-width: 1px;
-    border-color: #d3d3d3;
-    border-style: solid;
+  font-size: 11px;
+  border-width: 1px;
+  border-color: #d3d3d3;
+  border-style: solid;
 }
 
 table.legend_table,
 td {
-    border-width: 1px;
-    border-color: #d3d3d3;
-    border-style: solid;
-    padding: 2px;
+  border-width: 1px;
+  border-color: #d3d3d3;
+  border-style: solid;
+  padding: 2px;
 }
 
 div.table_content {
-    width: 80px;
-    text-align: center;
+  width: 80px;
+  text-align: center;
 }
 
 div.table_description {
-    width: 100px;
+  width: 100px;
 }
 
 #operation {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 #node-popUp {
-    display: none;
-    position: absolute;
-    top: 350px;
-    left: 170px;
-    z-index: 299;
-    width: 250px;
-    height: 120px;
-    background-color: #f9f9f9;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #5394ed;
-    padding: 10px;
-    text-align: center;
+  display: none;
+  position: absolute;
+  top: 350px;
+  left: 170px;
+  z-index: 299;
+  width: 250px;
+  height: 120px;
+  background-color: #f9f9f9;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #5394ed;
+  padding: 10px;
+  text-align: center;
 }
 
 #edge-popUp {
-    display: none;
-    position: absolute;
-    top: 350px;
-    left: 170px;
-    z-index: 299;
-    width: 250px;
-    height: 90px;
-    background-color: #f9f9f9;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #5394ed;
-    padding: 10px;
-    text-align: center;
+  display: none;
+  position: absolute;
+  top: 350px;
+  left: 170px;
+  z-index: 299;
+  width: 250px;
+  height: 90px;
+  background-color: #f9f9f9;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #5394ed;
+  padding: 10px;
+  text-align: center;
 }
 
 .locale {
-    display: none;
+  display: none;
 }
