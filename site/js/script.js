@@ -194,15 +194,14 @@ function clearGraph() {
     network = new vis.Network(container, data, options);
 }
 
-//TODO: implement function which listen when node is selected
-//
+//select only two nodes. Route from start node(green label) to end node(red label)
 network.on("selectNode", function (params) {
     addToRoute(params.nodes[0]);
 });
 
 var routeFromTo = [];
 
-// add node to arr
+// add node to arr route
 function addToRoute(node) {
     switch (routeFromTo.length) {
         case 0:
@@ -217,14 +216,22 @@ function addToRoute(node) {
             nodes.update([{id: node, color: {background: 'red', highlight: 'red'}}]);
             //mark as red
             break;
-        default:
-            //TODO: this doesnt work
+        default:            
             nodes.update([{id: routeFromTo[1], color: {background:'#a0a0a0', highlight:'#6f6f6f'}}]);
             routeFromTo.pop();
             routeFromTo.push(node);
             nodes.update([{id: node, color: {background: 'red', highlight: 'red'}}]);
-        //mark as red
+            //mark as red
 
     }
+    // for test
     console.log(`Array route: ${routeFromTo}`);
 }
+//deselect route nodes. If click on blank place, nodes was deselected
+network.on("click", function(params){
+    
+    if(params.nodes.length == 0 && params.edges.length == 0){
+        nodes.update([{id: routeFromTo[0], color: {background:'#a0a0a0', highlight:'#6f6f6f'}}, {id: routeFromTo[1], color: {background:'#a0a0a0', highlight:'#6f6f6f'}}]);
+        routeFromTo.length = 0;
+    }
+});
