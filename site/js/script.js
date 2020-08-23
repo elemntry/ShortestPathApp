@@ -14,7 +14,14 @@ var edges = new vis.DataSet([
   { from: 2, to: 5 },
   { from: 3, to: 3 },
 ]);
-
+//color of nodes
+let bg = "#277DA1";
+let hlBg = "#577590";
+let startNodeBg = "#04bd00";
+let startNodeHlBg = "#04bd00";
+let endNodeBg = "#F94144";
+let endNodeHlBg = "#F94144";
+let fontColor = "#FFFFFF"
 // create a network
 var container = document.getElementById("mynetwork");
 var data = {
@@ -27,9 +34,12 @@ var options = {
   },
   nodes: {
     color: {
-      background: "#a0a0a0",
-      highlight: "#6f6f6f",
+      background: bg,
+      highlight: hlBg,
     },
+    font:{
+      color: fontColor,
+    }
   },
   edges: {
     arrows: {
@@ -187,8 +197,11 @@ document.getElementById("isDirected").addEventListener("change", function () {
 //remove graph
 document.getElementById("remove-graph").addEventListener(
   "click",
-  (e) => {
-    clearGraph();
+  (e) => {    
+    clearGraph();    
+    checkAllRouteNodesCheck();    
+    let nodeSpan = document.querySelectorAll(".path-info__node");
+    nodeSpan.forEach(el => el.textContent = '');
   },
   false
 );
@@ -203,6 +216,7 @@ function clearGraph() {
     edges: edges,
   };
   network = new vis.Network(container, data, options);
+  network.redraw();
 }
 
 //select only two nodes. Route from start node(green label) to end node(red label)
@@ -219,7 +233,7 @@ function addToRoute(node) {
       routeFromTo.push(node);
       console.log(node);
       nodes.update([
-        { id: node, color: { background: "green", highlight: "green" } },
+        { id: node, color: { background: startNodeBg, highlight:startNodeHlBg } },
       ]);
       //mark as green
       break;
@@ -227,7 +241,7 @@ function addToRoute(node) {
       node.group = "end";
       routeFromTo.push(node);
       nodes.update([
-        { id: node, color: { background: "red", highlight: "red" } },
+        { id: node, color: { background: endNodeBg, highlight: endNodeHlBg } },
       ]);
       //mark as red
       break;
@@ -235,13 +249,13 @@ function addToRoute(node) {
       nodes.update([
         {
           id: routeFromTo[1],
-          color: { background: "#a0a0a0", highlight: "#6f6f6f" },
+          color: { background: bg, highlight: hlBg },
         },
       ]);
       routeFromTo.pop();
       routeFromTo.push(node);
       nodes.update([
-        { id: node, color: { background: "red", highlight: "red" } },
+        { id: node, color: { background: endNodeBg, highlight:endNodeHlBg } },
       ]);
     //mark as red
   }
@@ -257,7 +271,7 @@ network.on("click", function (params) {
       nodes.update([
         {
           id: routeFromTo[0],
-          color: { background: "#a0a0a0", highlight: "#6f6f6f" },
+          color: { background: bg, highlight: hlBg },
         },
       ]);
       routeFromTo.length = 0;
@@ -266,11 +280,11 @@ network.on("click", function (params) {
       nodes.update([
         {
           id: routeFromTo[0],
-          color: { background: "#a0a0a0", highlight: "#6f6f6f" },
+          color: { background: bg, highlight:hlBg },
         },
         {
           id: routeFromTo[1],
-          color: { background: "#a0a0a0", highlight: "#6f6f6f" },
+          color: { background: bg, highlight: hlBg },
         },
       ]);
       routeFromTo.length = 0;
@@ -285,4 +299,14 @@ network.on("click", function (params) {
   }
 });
 
-// TODO: check is all nodes are selected to find. if dalse button find route must be disabled
+// check is all nodes are selected to find. if dalse button find route must be disabled
+function checkAllRouteNodesCheck() {
+  if (routeFromTo.length === 2){
+    document.getElementById("sendrequest").disabled = false;
+    console.log('enabled btn');
+  } else{
+    document.getElementById("sendrequest").disabled = true;
+    console.log('disabled btn');
+  }
+}
+document.addEventListener('click', e => checkAllRouteNodesCheck() );

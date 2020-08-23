@@ -159,6 +159,14 @@ body {
   color: #f6f6f6;
   background-color: #04bd00;
 }
+.btn__find:disabled{
+  background-color: #ccc;
+  opacity: 1;  
+}
+.btn__find:disabled:hover{
+  opacity: 1;
+  background-color: #ccc;  
+}
 
 .btn__remove {
   grid-area: btn-remove;
