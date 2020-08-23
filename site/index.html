@@ -3,7 +3,6 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Курсовая работа. АЛГОРИТМЫ НА ГРАФАХ: ПОИСК КРАТЧАЙШЕГО ПУТИ</title>
-
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/png" href="./img/favicon.png" />
     <link
@@ -14,23 +13,6 @@
   </head>
 
   <body>
-    <p class="locale">
-      <label for="locale">Select a locale:</label>
-      <select id="locale" onchange="draw();">
-        <option value="en">en</option>
-        <option value="cn">cn</option>
-        <option value="cs">cs</option>
-        <option value="de">de</option>
-        <option value="es">es</option>
-        <option value="fr">fr</option>
-        <option value="it">it</option>
-        <option value="nl">nl</option>
-        <option value="pt-br">pt</option>
-        <option value="ru">ru</option>
-        <option value="uk">uk</option>
-      </select>
-    </p>
-
     <div id="node-popUp">
       <span id="node-operation">узел</span> <br />
       <table style="margin: auto;">
@@ -95,7 +77,9 @@
               <input type="checkbox" id="isDirected" name="isDirected" />
               <label for="isDirected">ориентированный граф </label>
             </div>
-            <button id="sendrequest" class="btn btn__find" disabled>Найти путь</button>
+            <button id="sendrequest" class="btn btn__find" disabled>
+              Найти путь
+            </button>
             <button id="remove-graph" class="btn btn__remove">
               удалить граф
             </button>
