@@ -13,57 +13,59 @@
   </head>
 
   <body>
-    <div id="node-popUp">
-      <span id="node-operation">узел</span> <br />
-      <table style="margin: auto;">
-        <!--    custom id -->
-        <!--    <tr>-->
-        <!--      <td>id</td>-->
-        <!--      <td>-->
-        <!--        <label for="node-id"></label><input id="node-id" value="идентификатор"/>-->
-        <!--      </td>-->
-        <!--    </tr>-->
-        <!--    /custom id-->
-        <tr>
-          <td>имя</td>
-          <td>
-            <label for="node-label"></label
-            ><input id="node-label" value="значение" />
-          </td>
-        </tr>
-      </table>
+    
 
-      <input type="button" value="сохранить" id="node-saveButton" />
-      <input type="button" value="отмена" id="node-cancelButton" />
-    </div>
-
-    <div id="edge-popUp">
-      <span id="edge-operation">ребро</span> <br />
-      <table style="margin: auto;">
-        <tr>
-          <td>вес</td>
-          <td>
-            <label for="edge-label"></label
-            ><input
-              id="edge-label"
-              value="1"
-              type="number"
-              min="1"
-              oninput="validity.valid||(value='');"
-            />
-          </td>
-        </tr>
-      </table>
-
-      <input type="button" value="сохранить" id="edge-saveButton" />
-      <input type="button" value="отмена" id="edge-cancelButton" />
-    </div>
+    
     <div class="container">
       <section class="shortestpath">
         <header class="header">
           <h1>Курсовая работа. Алгоритмы на графах: поиск кратчайшего пути</h1>
         </header>
         <article class="graph">
+          <div id="node-popUp">
+            <span id="node-operation">узел</span> <br />
+            <table style="margin: auto;">
+              <!--    custom id -->
+              <!--    <tr>-->
+              <!--      <td>id</td>-->
+              <!--      <td>-->
+              <!--        <label for="node-id"></label><input id="node-id" value="идентификатор"/>-->
+              <!--      </td>-->
+              <!--    </tr>-->
+              <!--    /custom id-->
+              <tr>
+                <td>имя</td>
+                <td>
+                  <label for="node-label"></label
+                  ><input id="node-label" value="значение" />
+                </td>
+              </tr>
+            </table>
+
+            <input type="button" value="сохранить" id="node-saveButton" />
+            <input type="button" value="отмена" id="node-cancelButton" />
+          </div>
+          <div id="edge-popUp">
+            <span id="edge-operation">ребро</span> <br />
+            <table style="margin: auto;">
+              <tr>
+                <td>вес</td>
+                <td>
+                  <label for="edge-label"></label
+                  ><input
+                        id="edge-label"
+                        value="1"
+                        type="number"
+                        min="1"
+                        oninput="validity.valid||(value='');"
+                />
+                </td>
+              </tr>
+            </table>
+
+            <input type="button" value="сохранить" id="edge-saveButton" />
+            <input type="button" value="отмена" id="edge-cancelButton" />
+          </div>
           <div id="mynetwork" class="mynetwork"></div>
         </article>
         <aside class="settings">
@@ -96,11 +98,11 @@
                 </p>
               </div>
               <div class="path-info__result">
-                <p>Составляет: <span class="path-info__result"></span></p>
+                <p>Составляет: <span class="path-info__node path-info__result_dist"></span></p>
               </div>
               <div class="shortest__path"></div>
             </div>
-            <button class="btn btn__showpath">Показать маршрут</button>
+            <button id="draw-path" class="btn btn__showpath" disabled>Показать маршрут</button>
           </div>
         </aside>
       </section>
