@@ -26,19 +26,4 @@ namespace ShortestPathAlgos
             return Payload;
         }
     }
-    //TODO: make correct class 
-    // public class Node<T> : Node
-    // {
-    //     public T Payload { get; private set; }
-    //
-    //     public Node(string payload) : base(payload)
-    //     {
-    //         // Payload = payload;
-    //     }
-    //
-    //     public override string ToString()
-    //     {
-    //         // return Payload;
-    //     }
-    // }
 }
